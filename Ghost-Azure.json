@@ -1,0 +1,293 @@
+{
+    "source": 2,
+    "revision": 4,
+    "description": null,
+    "variables": {},
+    "variableGroups": [],
+    "environments": [
+        {
+            "id": 2,
+            "name": "Stage 1",
+            "rank": 1,
+            "variables": {},
+            "variableGroups": [],
+            "preDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 4
+                    }
+                ],
+                "approvalOptions": {
+                    "requiredApproverCount": null,
+                    "releaseCreatorCanBeApprover": false,
+                    "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": false,
+                    "enforceIdentityRevalidation": false,
+                    "timeoutInMinutes": 0,
+                    "executionOrder": 1
+                }
+            },
+            "deployStep": {
+                "id": 5
+            },
+            "postDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 6
+                    }
+                ],
+                "approvalOptions": {
+                    "requiredApproverCount": null,
+                    "releaseCreatorCanBeApprover": false,
+                    "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": false,
+                    "enforceIdentityRevalidation": false,
+                    "timeoutInMinutes": 0,
+                    "executionOrder": 2
+                }
+            },
+            "deployPhases": [
+                {
+                    "deploymentInput": {
+                        "parallelExecution": {
+                            "parallelExecutionType": 0
+                        },
+                        "agentSpecification": {
+                            "identifier": "vs2017-win2016"
+                        },
+                        "skipArtifactsDownload": false,
+                        "artifactsDownloadInput": {
+                            "downloadInputs": []
+                        },
+                        "queueId": 237,
+                        "demands": [],
+                        "enableAccessToken": false,
+                        "timeoutInMinutes": 0,
+                        "jobCancelTimeoutInMinutes": 1,
+                        "condition": "succeeded()",
+                        "overrideInputs": {}
+                    },
+                    "rank": 1,
+                    "phaseType": 1,
+                    "name": "Agent job",
+                    "refName": null,
+                    "workflowTasks": [
+                        {
+                            "environment": {},
+                            "taskId": "31c75bbb-bcdf-4706-8d7c-4da6a1959bc2",
+                            "version": "0.*",
+                            "name": "Use Node 8.11.1",
+                            "refName": "",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "retryCountOnTaskFailure": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "versionSpec": "8.11.1",
+                                "checkLatest": "false",
+                                "force32bit": "false"
+                            }
+                        },
+                        {
+                            "environment": {},
+                            "taskId": "497d490f-eea7-4f2b-ab94-48d9c1acdcb1",
+                            "version": "4.*",
+                            "name": "Azure App Service Deploy: ghostazure",
+                            "refName": "",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "retryCountOnTaskFailure": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "ConnectionType": "AzureRM",
+                                "ConnectedServiceName": "",
+                                "PublishProfilePath": "$(System.DefaultWorkingDirectory)/**/*.pubxml",
+                                "PublishProfilePassword": "",
+                                "WebAppKind": "webApp",
+                                "WebAppName": "",
+                                "DeployToSlotOrASEFlag": "false",
+                                "ResourceGroupName": "",
+                                "SlotName": "production",
+                                "DockerNamespace": "",
+                                "DockerRepository": "",
+                                "DockerImageTag": "",
+                                "VirtualApplication": "",
+                                "Package": "$(System.DefaultWorkingDirectory)/**/*.zip",
+                                "RuntimeStack": "",
+                                "RuntimeStackFunction": "",
+                                "StartupCommand": "",
+                                "ScriptType": "Inline Script",
+                                "InlineScript": "call npm install --only=prod --ignore-scripts",
+                                "ScriptPath": "",
+                                "WebConfigParameters": "-Handler iisnode -NodeStartFile server.js -appType node",
+                                "AppSettings": "",
+                                "ConfigurationSettings": "",
+                                "UseWebDeploy": "false",
+                                "DeploymentType": "webDeploy",
+                                "TakeAppOfflineFlag": "true",
+                                "SetParametersFile": "",
+                                "RemoveAdditionalFilesFlag": "false",
+                                "ExcludeFilesFromAppDataFlag": "true",
+                                "AdditionalArguments": "-retryAttempts:6 -retryInterval:10000",
+                                "RenameFilesFlag": "true",
+                                "XmlTransformation": "false",
+                                "XmlVariableSubstitution": "false",
+                                "JSONFiles": ""
+                            }
+                        }
+                    ]
+                }
+            ],
+            "environmentOptions": {
+                "emailNotificationType": "OnlyOnFailure",
+                "emailRecipients": "release.environment.owner;release.creator",
+                "skipArtifactsDownload": false,
+                "timeoutInMinutes": 0,
+                "enableAccessToken": false,
+                "publishDeploymentStatus": true,
+                "badgeEnabled": false,
+                "autoLinkWorkItems": false,
+                "pullRequestDeploymentEnabled": false
+            },
+            "demands": [],
+            "conditions": [
+                {
+                    "name": "ReleaseStarted",
+                    "conditionType": 1,
+                    "value": ""
+                }
+            ],
+            "executionPolicy": {
+                "concurrencyCount": 1,
+                "queueDepthCount": 0
+            },
+            "schedules": [],
+            "currentRelease": {
+                "id": 5,
+                "url": "https://vsrm.dev.azure.com/gravityondiet/abc/_apis/Release/releases/5",
+                "_links": {}
+            },
+            "retentionPolicy": {
+                "daysToKeep": 30,
+                "releasesToKeep": 3,
+                "retainBuild": true
+            },
+            "processParameters": {},
+            "properties": {
+                "BoardsEnvironmentType": {
+                    "$type": "System.String",
+                    "$value": "unmapped"
+                },
+                "LinkBoardsWorkItems": {
+                    "$type": "System.String",
+                    "$value": "False"
+                }
+            },
+            "preDeploymentGates": {
+                "id": 0,
+                "gatesOptions": null,
+                "gates": []
+            },
+            "postDeploymentGates": {
+                "id": 0,
+                "gatesOptions": null,
+                "gates": []
+            },
+            "environmentTriggers": [],
+            "badgeUrl": "https://vsrm.dev.azure.com/gravityondiet/_apis/public/Release/badge/abc/2/2"
+        }
+    ],
+    "artifacts": [
+        {
+            "sourceId": "abc:74",
+            "type": "Build",
+            "alias": "_GhostCI-Azure",
+            "definitionReference": {
+                "artifactSourceDefinitionUrl": {
+                    "id": "https://dev.azure.com/gravityondiet/_permalink/_build/index?collectionId=abca&projectId=abc&definitionId=74",
+                    "name": ""
+                },
+                "defaultVersionBranch": {
+                    "id": "",
+                    "name": ""
+                },
+                "defaultVersionSpecific": {
+                    "id": "",
+                    "name": ""
+                },
+                "defaultVersionTags": {
+                    "id": "",
+                    "name": ""
+                },
+                "defaultVersionType": {
+                    "id": "latestType",
+                    "name": "Latest"
+                },
+                "definition": {
+                    "id": "74",
+                    "name": "GhostCI-Azure"
+                },
+                "definitions": {
+                    "id": "",
+                    "name": ""
+                },
+                "IsMultiDefinitionType": {
+                    "id": "False",
+                    "name": "False"
+                },
+                "project": {
+                    "id": "abc",
+                    "name": "Ghost"
+                },
+                "repository": {
+                    "id": "",
+                    "name": ""
+                }
+            },
+            "isPrimary": true,
+            "isRetained": false
+        }
+    ],
+    "triggers": [],
+    "releaseNameFormat": "Release-$(rev:r)",
+    "tags": [],
+    "properties": {
+        "DefinitionCreationSource": {
+            "$type": "System.String",
+            "$value": "ReleaseNew"
+        },
+        "IntegrateBoardsWorkItems": {
+            "$type": "System.String",
+            "$value": "False"
+        },
+        "IntegrateJiraWorkItems": {
+            "$type": "System.String",
+            "$value": "false"
+        }
+    },
+    "id": 2,
+    "name": "Ghost-Azure",
+    "path": "\\",
+    "projectReference": null,
+    "url": "https://vsrm.dev.azure.com/gravityondiet/abc/_apis/Release/definitions/2",
+    "_links": {
+        "self": {
+            "href": "https://vsrm.dev.azure.com/gravityondiet/abc/_apis/Release/definitions/2"
+        },
+        "web": {
+            "href": "https://dev.azure.com/gravityondiet/abc/_release?definitionId=2"
+        }
+    }
+}
